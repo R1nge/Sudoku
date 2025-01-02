@@ -92,9 +92,11 @@ namespace _Assets.Scripts.Gameplay.Sudoku.Grid.Controllers
             var y = sudokuView.Y;
             if (_gridModel.Cells[x, y].IsChangeable)
             {
-                _sudokuUndoHistory.Do(new SudokuResetNumbersAction(_gridModel, x, y, sudokuView));
-                _sudokuSelectionView.Hide();
-                CheckWin();
+                if (_gridModel.Cells[x, y].Number != 0)
+                {
+                    _sudokuUndoHistory.Do(new SudokuResetNumbersAction(_gridModel, x, y, sudokuView));
+                    _sudokuSelectionView.Hide();
+                }
             }
         }
 
