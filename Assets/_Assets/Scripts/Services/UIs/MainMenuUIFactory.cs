@@ -9,8 +9,8 @@ namespace _Assets.Scripts.Services.UIs
 {
     public class MainMenuUIFactory
     {
-        private readonly IObjectResolver _objectResolver;
         private readonly ConfigProvider _configProvider;
+        private readonly IObjectResolver _objectResolver;
 
         public MainMenuUIFactory(IObjectResolver objectResolver, ConfigProvider configProvider)
         {
@@ -28,6 +28,8 @@ namespace _Assets.Scripts.Services.UIs
                     return _objectResolver.Instantiate(_configProvider.UIConfig.LoadingUI);
                 case UIStateType.Game:
                     return _objectResolver.Instantiate(_configProvider.UIConfig.GameUI);
+                case UIStateType.Lose:
+                    return _objectResolver.Instantiate(_configProvider.UIConfig.LoseUI);
                 default:
                     throw new ArgumentOutOfRangeException(nameof(uiStateType), uiStateType, null);
             }

@@ -20,6 +20,11 @@ namespace _Assets.Scripts.Misc
 
         public void Tick()
         {
+            if (!_enabled)
+            {
+                return;
+            }
+
             if (!_moving)
             {
                 if (Input.mouseScrollDelta.y > 0)

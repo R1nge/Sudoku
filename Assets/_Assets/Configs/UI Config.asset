@@ -14,3 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   loadingUI: {fileID: 8335151913570239623, guid: e5f14642417d96a4fafa690d114b723d, type: 3}
   gameUI: {fileID: 8335151913570239623, guid: 9d145217430945b41a219a360d4ba837, type: 3}
+  loseUI: {fileID: 8335151913570239623, guid: 01a80ab0c87ba874c8619606958e2d7e, type: 3}

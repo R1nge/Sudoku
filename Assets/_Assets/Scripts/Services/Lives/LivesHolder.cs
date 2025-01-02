@@ -5,7 +5,8 @@ namespace _Assets.Scripts.Services.Lives
     public class LivesHolder
     {
         private int _lives;
-        public event Action<int> OnLivesChanged;
+
+        private LivesHolder() => Lives = 3;
 
         public int Lives
         {
@@ -17,7 +18,8 @@ namespace _Assets.Scripts.Services.Lives
             }
         }
 
-        private LivesHolder() => Lives = 3;
+        public bool HasLives => Lives > 0;
+        public event Action<int> OnLivesChanged;
         public void DecreaseLives() => Lives--;
         public void IncreaseLives() => Lives++;
         public void ResetLives() => Lives = 3;

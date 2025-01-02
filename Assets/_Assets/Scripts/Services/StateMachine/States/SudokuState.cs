@@ -40,6 +40,8 @@ namespace _Assets.Scripts.Services.StateMachine.States
         public async UniTask Exit()
         {
             _canvasScaler.Disable();
+            _sudokuPlayerInput.Disable();
+            _sudokuGridController.Dispose();
         }
     }
 }

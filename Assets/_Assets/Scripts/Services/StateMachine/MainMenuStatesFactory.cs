@@ -35,6 +35,8 @@ namespace _Assets.Scripts.Services.StateMachine
                     return new InitState(gameStateMachine, _uiStateMachine);
                 case GameStateType.Sudoku:
                     return new SudokuState(_sudokuGridController, _gridViewFactory, _sudokuPlayerInput, _canvasScaler);
+                case GameStateType.Lose:
+                    return new SudokuLoseState(gameStateMachine, _uiStateMachine);
                 default:
                     throw new ArgumentOutOfRangeException(nameof(gameStateType), gameStateType, null);
             }

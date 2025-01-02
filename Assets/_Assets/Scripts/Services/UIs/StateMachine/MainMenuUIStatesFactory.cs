@@ -20,6 +20,8 @@ namespace _Assets.Scripts.Services.UIs.StateMachine
                     return new UILoadingState(_mainMenuUIFactory, uiStateMachine);
                 case UIStateType.Game:
                     return new UIGameState(_mainMenuUIFactory);
+                case UIStateType.Lose:
+                    return new UILoseState(_mainMenuUIFactory);
                 default:
                     throw new ArgumentOutOfRangeException(nameof(uiStateType), uiStateType, null);
             }

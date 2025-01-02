@@ -2,7 +2,9 @@
 using _Assets.Scripts.Gameplay.Sudoku.Grid.Models;
 using _Assets.Scripts.Gameplay.Sudoku.Grid.Views;
 using _Assets.Scripts.Services.Lives;
+using _Assets.Scripts.Services.StateMachine;
 using _Assets.Scripts.Services.Undo.Sudoku;
+using Cysharp.Threading.Tasks;
 using UnityEngine;
 using VContainer;
 using VContainer.Unity;
@@ -12,6 +14,7 @@ namespace _Assets.Scripts.Gameplay.Sudoku.Grid.Controllers
     public class SudokuGridController
     {
         private readonly ConfigProvider _configProvider;
+        private readonly GameStateMachine _gameStateMachine;
         private readonly LivesHolder _livesHolder;
         private readonly IObjectResolver _objectResolver;
         private readonly Sudoku _sudoku;
@@ -20,12 +23,14 @@ namespace _Assets.Scripts.Gameplay.Sudoku.Grid.Controllers
         private SudokuSelectionView _sudokuSelectionView;
         private SudokuUndoHistory _sudokuUndoHistory;
 
-        public SudokuGridController(Sudoku sudoku, IObjectResolver objectResolver, ConfigProvider configProvider, LivesHolder livesHolder)
+        public SudokuGridController(Sudoku sudoku, IObjectResolver objectResolver, ConfigProvider configProvider,
+            LivesHolder livesHolder, GameStateMachine gameStateMachine)
         {
             _sudoku = sudoku;
             _objectResolver = objectResolver;
             _configProvider = configProvider;
             _livesHolder = livesHolder;
+            _gameStateMachine = gameStateMachine;
         }
 
         public void Init(SudokuGridView sudokuGridView)
@@ -77,6 +82,13 @@ namespace _Assets.Scripts.Gameplay.Sudoku.Grid.Controllers
                 if (!HasErrors(x, y))
                 {
                     CheckWin();
+                }
+                else
+                {
+                    if (!_livesHolder.HasLives)
+                    {
+                        _gameStateMachine.SwitchState(GameStateType.Lose).Forget();
+                    }
                 }
             }
         }
@@ -138,6 +150,15 @@ namespace _Assets.Scripts.Gameplay.Sudoku.Grid.Controllers
             {
                 _sudokuSelectionView.Show(sudokuView);
             }
+        }
+
+        public void Dispose()
+        {
+            Object.Destroy(_gridView.gameObject);
+            Object.Destroy(_sudokuSelectionView.gameObject);
+            _gridModel = null;
+            _gridView = null;
+            _sudokuUndoHistory = null;
         }
     }
 }
