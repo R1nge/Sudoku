@@ -7,6 +7,7 @@ namespace _Assets.Scripts.Gameplay.Sudoku.Grid.Views
 {
     public class SudokuSkinView : MonoBehaviour, ISudokuCellView
     {
+        [SerializeField] private Color placedCorrectlyColor = Color.green;
         [SerializeField] private Color highLightColor;
         [SerializeField] private Image image;
         [SerializeField] private Image[] notes;
@@ -77,25 +78,27 @@ namespace _Assets.Scripts.Gameplay.Sudoku.Grid.Views
 
         public void Highlight(bool highlight)
         {
-            if (_isPlacedCorrectly)
-            {
-                return;
-            }
-
             if (highlight)
             {
                 image.color = highLightColor;
             }
             else
             {
-                image.color = _defaultColor;
+                if (_isPlacedCorrectly)
+                {
+                    image.color = placedCorrectlyColor;
+                }
+                else
+                {
+                    image.color = _defaultColor;
+                }
             }
         }
 
         public void PlacedCorrectly()
         {
             _isPlacedCorrectly = true;
-            image.color = Color.green;
+            image.color = placedCorrectlyColor;
         }
 
         private void SetSpriteInit(int number)
