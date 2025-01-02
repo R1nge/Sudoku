@@ -106,5 +106,10 @@ namespace _Assets.Scripts.Gameplay.Sudoku.Grid.Views
                 }
             }
         }
+
+        public void PlacedCorrectly(int x, int y)
+        {
+            _cells[x, y].PlacedCorrectly();
+        }
     }
 }

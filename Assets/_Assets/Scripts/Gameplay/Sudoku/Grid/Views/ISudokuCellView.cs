@@ -13,5 +13,6 @@ namespace _Assets.Scripts.Gameplay.Sudoku.Grid.Views
         public void SetNumberNote(int number);
         public void SetNumbers(int value, int note);
         public void Highlight(bool highlight);
+        public void PlacedCorrectly();
     }
 }

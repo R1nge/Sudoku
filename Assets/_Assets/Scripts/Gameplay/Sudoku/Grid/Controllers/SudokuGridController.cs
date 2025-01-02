@@ -81,10 +81,13 @@ namespace _Assets.Scripts.Gameplay.Sudoku.Grid.Controllers
                 _sudokuSelectionView.Hide();
                 if (!HasErrors(x, y))
                 {
+                    _gridModel.Cells[x, y].SetChangeable(false);
+                    _gridView.PlacedCorrectly(x, y);
                     CheckWin();
                 }
                 else
                 {
+                    _livesHolder.DecreaseLives();
                     if (!_livesHolder.HasLives)
                     {
                         _gameStateMachine.SwitchState(GameStateType.Lose).Forget();
@@ -135,7 +138,6 @@ namespace _Assets.Scripts.Gameplay.Sudoku.Grid.Controllers
             if (_sudoku.HasCellError(_gridModel.ToIntArray(), x, y))
             {
                 Debug.LogError("Cell error");
-                _livesHolder.DecreaseLives();
                 return true;
             }
 

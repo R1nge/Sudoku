@@ -13,6 +13,7 @@ namespace _Assets.Scripts.Gameplay.Sudoku.Grid.Views
         [Inject] private ConfigProvider _configProvider;
 
         private Color _defaultColor;
+        private bool _isPlacedCorrectly;
         private int _numberNote;
 
         public int X { get; private set; }
@@ -76,6 +77,11 @@ namespace _Assets.Scripts.Gameplay.Sudoku.Grid.Views
 
         public void Highlight(bool highlight)
         {
+            if (_isPlacedCorrectly)
+            {
+                return;
+            }
+
             if (highlight)
             {
                 image.color = highLightColor;
@@ -84,6 +90,12 @@ namespace _Assets.Scripts.Gameplay.Sudoku.Grid.Views
             {
                 image.color = _defaultColor;
             }
+        }
+
+        public void PlacedCorrectly()
+        {
+            _isPlacedCorrectly = true;
+            image.color = Color.green;
         }
 
         private void SetSpriteInit(int number)
