@@ -7,10 +7,9 @@ namespace _Assets.Scripts.Gameplay.Sudoku.Grid.Views
 {
     public class SudokuSkinView : MonoBehaviour, ISudokuCellView
     {
-        [SerializeField] private Color note;
         [SerializeField] private Image image;
+        [SerializeField] private Image[] notes;
         [Inject] private ConfigProvider _configProvider;
-        private Color _defaultColor;
 
         private int _numberNote;
 
@@ -21,11 +20,16 @@ namespace _Assets.Scripts.Gameplay.Sudoku.Grid.Views
 
         public void Init(int x, int y, int number)
         {
-            _defaultColor = image.color;
             X = x;
             Y = y;
             Number = number;
-            SetSprite(number);
+            SetSpriteInit(number);
+
+            for (int i = 0; i < notes.Length; i++)
+            {
+                notes[i].sprite = _configProvider.SudokuSkin.Sprites[i];
+                notes[i].gameObject.SetActive(false);
+            }
         }
 
         public void SetNumber(int number)
@@ -40,6 +44,7 @@ namespace _Assets.Scripts.Gameplay.Sudoku.Grid.Views
             _numberNote = number;
             Number = 0;
             SetSprite(number);
+            SetSpriteNote(number);
         }
 
         public void SetNumbers(int value, int note)
@@ -50,23 +55,28 @@ namespace _Assets.Scripts.Gameplay.Sudoku.Grid.Views
             if (Number != 0)
             {
                 SetSprite(Number);
-                image.color = _defaultColor;
             }
             else if (_numberNote != 0)
             {
-                SetSprite(_numberNote);
-                image.color = this.note;
+                SetSprite(0);
+                SetSpriteNote(_numberNote);
             }
             else
             {
                 SetSprite(0);
-                image.color = _defaultColor;
             }
         }
 
-        private void SetSprite(int number)
+        private void SetSpriteInit(int number)
         {
-            if (number <= 0)
+            ResetNoteSprites();
+
+            if (number != 0)
+            {
+                number -= 1;
+            }
+
+            if (number == 0)
             {
                 image.sprite = null;
             }
@@ -74,14 +84,36 @@ namespace _Assets.Scripts.Gameplay.Sudoku.Grid.Views
             {
                 image.sprite = _configProvider.SudokuSkin.Sprites[number];
             }
+        }
 
-            if (_numberNote != 0)
+        private void SetSprite(int number)
+        {
+            ResetNoteSprites();
+
+            if (number <= 0)
             {
-                image.color = note;
+                image.sprite = null;
             }
             else
             {
-                image.color = _defaultColor;
+                image.sprite = _configProvider.SudokuSkin.Sprites[number - 1];
+            }
+        }
+
+        private void SetSpriteNote(int number)
+        {
+            ResetNoteSprites();
+
+            notes[number].gameObject.SetActive(true);
+
+            image.sprite = null;
+        }
+
+        private void ResetNoteSprites()
+        {
+            for (int i = 0; i < notes.Length; i++)
+            {
+                notes[i].gameObject.SetActive(false);
             }
         }
     }

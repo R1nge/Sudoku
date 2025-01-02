@@ -18,7 +18,7 @@ namespace _Assets.Scripts.Gameplay.Sudoku.Grid.Views
 
         private void Awake()
         {
-            for (var i = 1; i < images.Length; i++)
+            for (int i = 0; i < _configProvider.SudokuSkin.Sprites.Length; i++)
             {
                 images[i].sprite = _configProvider.SudokuSkin.Sprites[i];
             }
@@ -26,7 +26,8 @@ namespace _Assets.Scripts.Gameplay.Sudoku.Grid.Views
 
         private void OnLeftClick(int index)
         {
-            if (index == 0)
+            index++;
+            if (index == 10)
             {
                 _sudokuGridController.Reset(_sudokuCellView);
             }
@@ -38,7 +39,7 @@ namespace _Assets.Scripts.Gameplay.Sudoku.Grid.Views
 
         private void OnRightClick(int index)
         {
-            if (index == 0)
+            if (index == 9)
             {
                 _sudokuGridController.Reset(_sudokuCellView);
             }

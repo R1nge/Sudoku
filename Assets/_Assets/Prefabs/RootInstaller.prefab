@@ -63,7 +63,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   uiConfig: {fileID: 11400000, guid: c01c0ec4a5855f641b051cf97763b193, type: 2}
-  mineSweeperGridView: {fileID: 8870383728679382268, guid: 6c11b442af4c3e44d9fc3b6414d3e206, type: 3}
   sudokuGridView: {fileID: -7437120298914207129, guid: f728f94080d708f428dbff9b22c12050, type: 3}
   sudokuSelectionView: {fileID: 7805690850728876065, guid: e8ee1e534ccc5454988ce23c042f733c, type: 3}
   sudokuSkinConfig: {fileID: 11400000, guid: ab6ef71d67af58a4cb6eb393fd2611b7, type: 2}

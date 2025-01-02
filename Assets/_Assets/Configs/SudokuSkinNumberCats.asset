@@ -13,7 +13,6 @@ MonoBehaviour:
   m_Name: SudokuSkinNumberCats
   m_EditorClassIdentifier: 
   sprites:
-  - {fileID: 0}
   - {fileID: -679611583, guid: 6c249069c5ef33b4fa0d9e416aec7339, type: 3}
   - {fileID: -1429776118, guid: 6c249069c5ef33b4fa0d9e416aec7339, type: 3}
   - {fileID: -270535323, guid: 6c249069c5ef33b4fa0d9e416aec7339, type: 3}
