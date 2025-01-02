@@ -52,11 +52,15 @@ namespace _Assets.Scripts.Gameplay.Sudoku.Grid.Views
             Number = value;
             _numberNote = note;
 
-            if (Number != 0)
+            if (Number != 0 && _numberNote != 0)
             {
                 SetSprite(Number);
             }
-            else if (_numberNote != 0)
+            else if (Number != 0 && _numberNote == 0)
+            {
+                SetSprite(Number);
+            }
+            else if (Number == 0 && _numberNote != 0)
             {
                 SetSprite(0);
                 SetSpriteNote(_numberNote);
