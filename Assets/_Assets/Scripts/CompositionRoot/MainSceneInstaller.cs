@@ -3,6 +3,7 @@ using _Assets.Scripts.Gameplay.Sudoku;
 using _Assets.Scripts.Gameplay.Sudoku.Grid.Controllers;
 using _Assets.Scripts.Misc;
 using _Assets.Scripts.Services.Grid;
+using _Assets.Scripts.Services.Lives;
 using _Assets.Scripts.Services.StateMachine;
 using _Assets.Scripts.Services.StateMachine.StatesCreators;
 using _Assets.Scripts.Services.UIs;
@@ -20,6 +21,8 @@ namespace _Assets.Scripts.CompositionRoot
 
         protected override void Configure(IContainerBuilder builder)
         {
+            builder.Register<LivesHolder>(Lifetime.Singleton);
+            
             builder.RegisterComponent(cameraHandler);
             builder.RegisterEntryPoint<CanvasScaler>().AsSelf();
             builder.RegisterEntryPoint<CameraZoomer>().AsSelf();

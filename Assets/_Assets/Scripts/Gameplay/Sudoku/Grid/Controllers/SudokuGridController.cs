@@ -1,6 +1,7 @@
 ﻿using _Assets.Scripts.Configs;
 using _Assets.Scripts.Gameplay.Sudoku.Grid.Models;
 using _Assets.Scripts.Gameplay.Sudoku.Grid.Views;
+using _Assets.Scripts.Services.Lives;
 using _Assets.Scripts.Services.Undo.Sudoku;
 using UnityEngine;
 using VContainer;
@@ -11,6 +12,7 @@ namespace _Assets.Scripts.Gameplay.Sudoku.Grid.Controllers
     public class SudokuGridController
     {
         private readonly ConfigProvider _configProvider;
+        private readonly LivesHolder _livesHolder;
         private readonly IObjectResolver _objectResolver;
         private readonly Sudoku _sudoku;
         private SudokuGridModel _gridModel;
@@ -18,11 +20,12 @@ namespace _Assets.Scripts.Gameplay.Sudoku.Grid.Controllers
         private SudokuSelectionView _sudokuSelectionView;
         private SudokuUndoHistory _sudokuUndoHistory;
 
-        public SudokuGridController(Sudoku sudoku, IObjectResolver objectResolver, ConfigProvider configProvider)
+        public SudokuGridController(Sudoku sudoku, IObjectResolver objectResolver, ConfigProvider configProvider, LivesHolder livesHolder)
         {
             _sudoku = sudoku;
             _objectResolver = objectResolver;
             _configProvider = configProvider;
+            _livesHolder = livesHolder;
         }
 
         public void Init(SudokuGridView sudokuGridView)
@@ -120,6 +123,7 @@ namespace _Assets.Scripts.Gameplay.Sudoku.Grid.Controllers
             if (_sudoku.HasCellError(_gridModel.ToIntArray(), x, y))
             {
                 Debug.LogError("Cell error");
+                _livesHolder.DecreaseLives();
                 return true;
             }
 
