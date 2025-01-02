@@ -199,5 +199,10 @@ namespace _Assets.Scripts.Gameplay.Sudoku
                 grid[row, col] = 0;
             }
         }
+        
+        public bool HasCellError(int[,] sudokuBoard, int row, int column)
+        {
+            return !IsValid(sudokuBoard, (row, column));
+        }
     }
 }

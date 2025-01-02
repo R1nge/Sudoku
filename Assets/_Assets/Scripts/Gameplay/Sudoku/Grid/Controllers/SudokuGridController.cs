@@ -71,7 +71,10 @@ namespace _Assets.Scripts.Gameplay.Sudoku.Grid.Controllers
             {
                 _sudokuUndoHistory.Do(new SudokuSetNumberAction(_gridModel, x, y, sudokuView, number));
                 _sudokuSelectionView.Hide();
-                CheckWin();
+                if (!HasErrors(x, y))
+                {
+                    CheckWin();
+                }
             }
         }
 
@@ -110,6 +113,17 @@ namespace _Assets.Scripts.Gameplay.Sudoku.Grid.Controllers
             {
                 Debug.LogError("Sudoku NOT WIN");
             }
+        }
+
+        private bool HasErrors(int x, int y)
+        {
+            if (_sudoku.HasCellError(_gridModel.ToIntArray(), x, y))
+            {
+                Debug.LogError("Cell error");
+                return true;
+            }
+
+            return false;
         }
 
         public void ShowSelection(ISudokuCellView sudokuView)
