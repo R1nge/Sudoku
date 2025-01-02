@@ -48,8 +48,6 @@ namespace _Assets.Scripts.Gameplay.Sudoku.Grid.Views
                 cellsParent.transform.localPosition = new Vector3((-sudokuGridModel.Width + 1) * 25,
                     (-sudokuGridModel.Height + 1) * 25, 0);
             }
-            
-            transform.SetAsFirstSibling();
         }
 
         public ISudokuCellView GetCellView(int x, int y) => _cells[x, y];
