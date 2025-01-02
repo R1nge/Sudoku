@@ -1,19 +1,5 @@
 {
   "dependencies": {
-    "com.codewriter.morpeh.events": {
-      "version": "https://github.com/codewriter-packages/Morpeh.Events.git",
-      "depth": 0,
-      "source": "git",
-      "dependencies": {},
-      "hash": "8eecc3bf9440af87ef3c66bf7a1ff210ff361c03"
-    },
-    "com.codewriter.morpeh.systemstateprocessor": {
-      "version": "https://github.com/codewriter-packages/Morpeh.SystemStateProcessor.git",
-      "depth": 0,
-      "source": "git",
-      "dependencies": {},
-      "hash": "322531044f5c332efa1bffa820968279005222d7"
-    },
     "com.codewriter.triinspector": {
       "version": "https://github.com/codewriter-packages/Tri-Inspector.git",
       "depth": 0,
@@ -29,13 +15,6 @@
       "source": "git",
       "dependencies": {},
       "hash": "b0d01ca75fc890b76e81202d655d17c1f4214a18"
-    },
-    "com.scellecs.morpeh": {
-      "version": "https://github.com/scellecs/morpeh.git#2023.1.0",
-      "depth": 0,
-      "source": "git",
-      "dependencies": {},
-      "hash": "26ab7f5cbc1cc2e632a33617f310f985b48cb015"
     },
     "com.unity.2d.animation": {
       "version": "10.1.3",
