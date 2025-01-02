@@ -41,7 +41,7 @@ namespace _Assets.Scripts.Gameplay.Sudoku.Grid.Controllers
             {
                 for (int x = 0; x < board.GetLength(0); x++)
                 {
-                    _gridModel.SetNumber(x, y, board[x, y]);
+                    _gridModel.Init(x, y, board[x, y]);
                 }
             }
 
@@ -92,7 +92,7 @@ namespace _Assets.Scripts.Gameplay.Sudoku.Grid.Controllers
             var y = sudokuView.Y;
             if (_gridModel.Cells[x, y].IsChangeable)
             {
-                _sudokuUndoHistory.Do(new SudokuSetNumberAction(_gridModel, x, y, sudokuView, 0));
+                _sudokuUndoHistory.Do(new SudokuResetNumbersAction(_gridModel, x, y, sudokuView));
                 _sudokuSelectionView.Hide();
                 CheckWin();
             }

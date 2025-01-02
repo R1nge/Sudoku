@@ -71,10 +71,13 @@ namespace _Assets.Scripts.Gameplay.Sudoku.Grid.Views
         {
             ResetNoteSprites();
 
-            if (number != 0)
+            if (number == 0)
             {
-                number -= 1;
+                image.sprite = null;
+                return;
             }
+
+            number -= 1;
 
             if (number == 0)
             {

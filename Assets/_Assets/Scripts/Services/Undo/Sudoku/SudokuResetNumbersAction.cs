@@ -3,14 +3,15 @@ using _Assets.Scripts.Gameplay.Sudoku.Grid.Views;
 
 namespace _Assets.Scripts.Services.Undo.Sudoku
 {
-    public class SudokuDecreaseNumberAction : IUndoableAction
+    public class SudokuResetNumbersAction : IUndoableAction
     {
         private readonly ISudokuCellView _cellView;
         private readonly SudokuGridModel _model;
         private readonly int _x, _y;
+        private int _noteValue;
         private int _previousValue;
 
-        public SudokuDecreaseNumberAction(SudokuGridModel model, int x, int y, ISudokuCellView cellView)
+        public SudokuResetNumbersAction(SudokuGridModel model, int x, int y, ISudokuCellView cellView)
         {
             _model = model;
             _x = x;
@@ -21,15 +22,17 @@ namespace _Assets.Scripts.Services.Undo.Sudoku
         public void Execute()
         {
             _previousValue = _model.GetCell(_x, _y).Number;
-            var number = _model.DecreaseNumber(_x, _y);
-            _model.GetCell(_x, _y).SetNumber(number);
-            _cellView.SetNumber(number);
+            _noteValue = _model.GetCell(_x, _y).NumberNote;
+            _model.GetCell(_x, _y).SetNumber(0);
+            _model.GetCell(_x, _y).SetNumberNote(0);
+            _cellView.SetNumber(0);
         }
 
         public void Undo()
         {
-            _model.SetNumber(_x, _y, _previousValue);
-            _cellView.SetNumber(_previousValue);
+            _model.GetCell(_x, _y).SetNumber(_previousValue);
+            _model.GetCell(_x, _y).SetNumberNote(_noteValue);
+            _cellView.SetNumbers(_previousValue, _noteValue);
         }
     }
 }
