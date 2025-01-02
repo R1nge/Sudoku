@@ -83,7 +83,11 @@ namespace _Assets.Scripts.Gameplay.Sudoku.Grid.Controllers
                 {
                     _gridModel.Cells[x, y].SetChangeable(false);
                     _gridView.PlacedCorrectly(x, y);
-                    CheckWin();
+                    if (!CheckWin())
+                    {
+                        _gridView.HighlightSubGrid(x, y);
+                        _gridView.HighlightCellsWith(number);
+                    }
                 }
                 else
                 {
@@ -121,16 +125,17 @@ namespace _Assets.Scripts.Gameplay.Sudoku.Grid.Controllers
             }
         }
 
-        private void CheckWin()
+        private bool CheckWin()
         {
             if (_sudoku.CheckWin(_gridModel.ToIntArray()))
             {
                 Debug.LogError("Sudoku WIN");
+                return true;
             }
-            else
-            {
-                Debug.LogError("Sudoku NOT WIN");
-            }
+
+            Debug.LogError("Sudoku NOT WIN");
+
+            return false;
         }
 
         private bool HasErrors(int x, int y)

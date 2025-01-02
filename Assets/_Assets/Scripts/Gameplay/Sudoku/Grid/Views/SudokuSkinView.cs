@@ -80,7 +80,15 @@ namespace _Assets.Scripts.Gameplay.Sudoku.Grid.Views
         {
             if (highlight)
             {
-                image.color = highLightColor;
+                if (_isPlacedCorrectly)
+                {
+                    image.color = placedCorrectlyColor;
+                }
+
+                else
+                {
+                    image.color = highLightColor;
+                }
             }
             else
             {
