@@ -51,5 +51,60 @@ namespace _Assets.Scripts.Gameplay.Sudoku.Grid.Views
         }
 
         public ISudokuCellView GetCellView(int x, int y) => _cells[x, y];
+
+        public void HighlightCellsWith(int number)
+        {
+            for (int y = 0; y < _cells.GetLength(1); y++)
+            {
+                for (int x = 0; x < _cells.GetLength(0); x++)
+                {
+                    if (_cells[x, y].Number == number)
+                    {
+                        _cells[x, y].Highlight(true);
+                    }
+                }
+            }
+        }
+
+        public void HighlightVerticalRows(int x)
+        {
+            for (int y = 0; y < _cells.GetLength(1); y++)
+            {
+                _cells[x, y].Highlight(true);
+            }
+        }
+
+        public void HighlightHorizontalRows(int y)
+        {
+            for (int x = 0; x < _cells.GetLength(0); x++)
+            {
+                _cells[x, y].Highlight(true);
+            }
+        }
+
+        public void HighlightSubGrid(int x, int y)
+        {
+            int startRow = x / 3 * 3;
+            int startCol = y / 3 * 3;
+
+            for (int i = 0; i < 3; i++)
+            {
+                for (int j = 0; j < 3; j++)
+                {
+                    _cells[startRow + i, startCol + j].Highlight(true);
+                }
+            }
+        }
+
+        public void ResetHighlight()
+        {
+            for (int y = 0; y < _cells.GetLength(1); y++)
+            {
+                for (int x = 0; x < _cells.GetLength(0); x++)
+                {
+                    _cells[x, y].Highlight(false);
+                }
+            }
+        }
     }
 }

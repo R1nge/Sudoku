@@ -506,6 +506,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ec34cd9917514696813eb162c16c6a01, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  highLightColor: {r: 0.5294118, g: 0.5294118, b: 0.5294118, a: 1}
   image: {fileID: 6221019035754431059}
   notes:
   - {fileID: 3517958495931961298}

@@ -25,6 +25,7 @@ namespace _Assets.Scripts.Gameplay.Sudoku
             {
                 _sudokuGridController.Undo();
                 _sudokuGridController.HideSelection();
+                _sudokuGridController.ResetHighlight();
             }
 
             if (Input.GetMouseButtonUp(0))
@@ -55,12 +56,14 @@ namespace _Assets.Scripts.Gameplay.Sudoku
 
                         hit = true;
                         _sudokuGridController.ShowSelection(cellView);
+                        _sudokuGridController.Highlight(cellView.Number, cellView.X, cellView.Y);
                     }
                 }
 
                 if (!hit)
                 {
                     _sudokuGridController.HideSelection();
+                    _sudokuGridController.ResetHighlight();
                 }
             }
         }

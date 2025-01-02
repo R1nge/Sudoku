@@ -7,10 +7,12 @@ namespace _Assets.Scripts.Gameplay.Sudoku.Grid.Views
 {
     public class SudokuSkinView : MonoBehaviour, ISudokuCellView
     {
+        [SerializeField] private Color highLightColor;
         [SerializeField] private Image image;
         [SerializeField] private Image[] notes;
         [Inject] private ConfigProvider _configProvider;
 
+        private Color _defaultColor;
         private int _numberNote;
 
         public int X { get; private set; }
@@ -20,6 +22,7 @@ namespace _Assets.Scripts.Gameplay.Sudoku.Grid.Views
 
         public void Init(int x, int y, int number)
         {
+            _defaultColor = image.color;
             X = x;
             Y = y;
             Number = number;
@@ -71,6 +74,18 @@ namespace _Assets.Scripts.Gameplay.Sudoku.Grid.Views
             }
         }
 
+        public void Highlight(bool highlight)
+        {
+            if (highlight)
+            {
+                image.color = highLightColor;
+            }
+            else
+            {
+                image.color = _defaultColor;
+            }
+        }
+
         private void SetSpriteInit(int number)
         {
             ResetNoteSprites();
@@ -103,7 +118,7 @@ namespace _Assets.Scripts.Gameplay.Sudoku.Grid.Views
         private void SetSpriteNote(int number)
         {
             ResetNoteSprites();
-            
+
             if (number <= 0)
             {
                 ResetNoteSprites();

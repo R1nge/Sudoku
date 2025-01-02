@@ -152,6 +152,25 @@ namespace _Assets.Scripts.Gameplay.Sudoku.Grid.Controllers
             }
         }
 
+        public void Highlight(int number, int x, int y)
+        {
+            _gridView.ResetHighlight();
+
+            _gridView.HighlightHorizontalRows(y);
+            _gridView.HighlightVerticalRows(x);
+            _gridView.HighlightSubGrid(x, y);
+
+            if (number == 0)
+                return;
+
+            _gridView.HighlightCellsWith(number);
+        }
+
+        public void ResetHighlight()
+        {
+            _gridView.ResetHighlight();
+        }
+
         public void Dispose()
         {
             Object.Destroy(_gridView.gameObject);
