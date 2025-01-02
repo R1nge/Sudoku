@@ -25,6 +25,7 @@ namespace _Assets.Scripts.Services.Undo.Sudoku
         {
             _previousValue = _model.GetCell(_x, _y).Number;
             _noteValue = _model.GetCell(_x, _y).NumberNote;
+            _model.GetCell(_x, _y).NumberNote = 0;
             _model.GetCell(_x, _y).SetNumber(_number);
             _cellView.SetNumber(_number);
         }

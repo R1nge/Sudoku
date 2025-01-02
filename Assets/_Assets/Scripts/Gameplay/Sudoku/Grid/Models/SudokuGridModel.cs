@@ -1,4 +1,6 @@
-﻿namespace _Assets.Scripts.Gameplay.Sudoku.Grid.Models
+﻿using UnityEngine;
+
+namespace _Assets.Scripts.Gameplay.Sudoku.Grid.Models
 {
     public class SudokuGridModel
     {
@@ -22,8 +24,8 @@
 
         public void Init(int x, int y, int number)
         {
-            Cells[x, y].SetChangeable(number == 0);
             Cells[x, y].SetNumber(number);
+            Cells[x, y].SetChangeable(number == 0);
         }
 
         public int[,] ToIntArray()

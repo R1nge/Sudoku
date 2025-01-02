@@ -81,16 +81,9 @@ namespace _Assets.Scripts.Gameplay.Sudoku.Grid.Views
                 return;
             }
 
-            number -= 1;
+            number--;
 
-            if (number == 0)
-            {
-                image.sprite = null;
-            }
-            else
-            {
-                image.sprite = _configProvider.SudokuSkin.Sprites[number];
-            }
+            image.sprite = _configProvider.SudokuSkin.Sprites[number];
         }
 
         private void SetSprite(int number)
@@ -110,8 +103,15 @@ namespace _Assets.Scripts.Gameplay.Sudoku.Grid.Views
         private void SetSpriteNote(int number)
         {
             ResetNoteSprites();
-
-            notes[number].gameObject.SetActive(true);
+            
+            if (number <= 0)
+            {
+                ResetNoteSprites();
+            }
+            else
+            {
+                notes[number - 1].gameObject.SetActive(true);
+            }
 
             image.sprite = null;
         }

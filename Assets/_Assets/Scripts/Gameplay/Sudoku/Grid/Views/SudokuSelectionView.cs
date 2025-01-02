@@ -39,7 +39,8 @@ namespace _Assets.Scripts.Gameplay.Sudoku.Grid.Views
 
         private void OnRightClick(int index)
         {
-            if (index == 9)
+            index++;
+            if (index == 10)
             {
                 _sudokuGridController.Reset(_sudokuCellView);
             }
