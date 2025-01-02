@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d23d72fd34fd41a0b32a99f59cd3257e, type: 3}
+  m_Name: SudokuSkinNumberCats
+  m_EditorClassIdentifier: 
+  sprites:
+  - {fileID: 0}
+  - {fileID: -679611583, guid: 6c249069c5ef33b4fa0d9e416aec7339, type: 3}
+  - {fileID: -1429776118, guid: 6c249069c5ef33b4fa0d9e416aec7339, type: 3}
+  - {fileID: -270535323, guid: 6c249069c5ef33b4fa0d9e416aec7339, type: 3}
+  - {fileID: 293619135, guid: 6c249069c5ef33b4fa0d9e416aec7339, type: 3}
+  - {fileID: -953985294, guid: 6c249069c5ef33b4fa0d9e416aec7339, type: 3}
+  - {fileID: -681607775, guid: 6c249069c5ef33b4fa0d9e416aec7339, type: 3}
+  - {fileID: 697026523, guid: 6c249069c5ef33b4fa0d9e416aec7339, type: 3}
+  - {fileID: 1281514087, guid: 6c249069c5ef33b4fa0d9e416aec7339, type: 3}
+  - {fileID: -2098606417, guid: 6c249069c5ef33b4fa0d9e416aec7339, type: 3}
