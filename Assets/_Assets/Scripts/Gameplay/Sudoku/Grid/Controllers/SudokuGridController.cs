@@ -83,6 +83,7 @@ namespace _Assets.Scripts.Gameplay.Sudoku.Grid.Controllers
                 {
                     _gridModel.Cells[x, y].SetChangeable(false);
                     _gridView.PlacedCorrectly(x, y);
+                    _sudokuUndoHistory.Clear();
                     if (!CheckWin())
                     {
                         _gridView.HighlightSubGrid(x, y);

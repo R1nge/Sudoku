@@ -19,5 +19,7 @@ namespace _Assets.Scripts.Services.Undo.Sudoku
                 action.Undo();
             }
         }
+
+        public void Clear() => _actionsStack.Clear();
     }
 }
