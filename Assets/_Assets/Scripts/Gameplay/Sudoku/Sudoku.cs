@@ -22,6 +22,48 @@ namespace _Assets.Scripts.Gameplay.Sudoku
             return grid;
         }
 
+        public Spot FindMostObviousSpot(int[,] board, int minPossibilities)
+        {
+            Spot obviousSpotAndValue = null;
+            for (int row = 0; row < 9; row++)
+            {
+                for (int col = 0; col < 9; col++)
+                {
+                    if (board[row, col] == 0)
+                    {
+                        var possibilities = PossibleValues(board, row, col);
+                        if (possibilities.Count < minPossibilities)
+                        {
+                            minPossibilities = possibilities.Count;
+                            if (possibilities.Count == 0)
+                            {
+                                return null;
+                            }
+
+                            obviousSpotAndValue = new Spot(row, col, possibilities.First());
+                        }
+                    }
+                }
+            }
+
+            return obviousSpotAndValue;
+        }
+
+        public HashSet<int> PossibleValues(int[,] board, int row, int col)
+        {
+            var values = new HashSet<int>(Enumerable.Range(1, 9));
+
+            for (int i = 0; i < 9; i++)
+            {
+                values.Remove(board[row, i]);
+                values.Remove(board[i, col]);
+                values.Remove(board[row - row % 3 + i / 3, col - col % 3 + i % 3]);
+            }
+
+            return values;
+        }
+
+
         private bool IsValid(int[,] sudokuBoard, (int row, int column) cellPosition)
         {
             var (row, column) = cellPosition;
@@ -203,6 +245,21 @@ namespace _Assets.Scripts.Gameplay.Sudoku
         public bool HasCellError(int[,] sudokuBoard, int row, int column)
         {
             return !IsValid(sudokuBoard, (row, column)) || !IsValidBoard(sudokuBoard);
+        }
+
+        [Serializable]
+        public class Spot
+        {
+            public int X;
+            public int Y;
+            public int Number;
+
+            public Spot(int x, int y, int number)
+            {
+                X = x;
+                Y = y;
+                Number = number;
+            }
         }
     }
 }
