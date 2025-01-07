@@ -45,7 +45,7 @@ namespace _Assets.Scripts.CompositionRoot
             builder.Register<Sudoku>(Lifetime.Singleton);
             builder.RegisterEntryPoint<SudokuPlayerInput>().AsSelf();
             builder.Register<SudokuGridController>(Lifetime.Singleton);
-            builder.RegisterEntryPoint<TipsService>().AsSelf();
+            builder.Register<TipsService>(Lifetime.Singleton).AsSelf();
         }
     }
 }

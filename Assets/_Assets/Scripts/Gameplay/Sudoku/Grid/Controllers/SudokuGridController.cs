@@ -179,6 +179,30 @@ namespace _Assets.Scripts.Gameplay.Sudoku.Grid.Controllers
             _gridView.ResetHighlight();
         }
 
+        public ISudokuCellView GetMostObviousCell()
+        {
+            var spot = _sudoku.FindMostObviousSpot(_gridModel.ToIntArray(), 10);
+
+            if (spot != null)
+            {
+                return _gridView.GetCellView(spot.X, spot.Y);
+            }
+
+            return null;
+        }
+
+        public int? GetMostObviousCellNumber()
+        {
+            var spot = _sudoku.FindMostObviousSpot(_gridModel.ToIntArray(), 10);
+
+            if (spot != null)
+            {
+                return spot.Number;
+            }
+
+            return null;
+        }
+
         public void OpenMostObviousCell()
         {
             var spot = _sudoku.FindMostObviousSpot(_gridModel.ToIntArray(), 10);

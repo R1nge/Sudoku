@@ -1,4 +1,7 @@
 ﻿using _Assets.Scripts.Configs;
+using DG.Tweening;
+using DG.Tweening.Core;
+using DG.Tweening.Plugins.Options;
 using UnityEngine;
 using UnityEngine.UI;
 using VContainer;
@@ -9,8 +12,11 @@ namespace _Assets.Scripts.Gameplay.Sudoku.Grid.Views
     {
         [SerializeField] private Color placedCorrectlyColor = Color.green;
         [SerializeField] private Color highLightColor;
-        [SerializeField] private Image image;
+        [SerializeField] private Image image, numberImage;
+        [SerializeField] private CanvasGroup canvasGroup;
         [SerializeField] private Image[] notes;
+        [SerializeField] private float blinkDuration = 2.5f;
+        private TweenerCore<float, float, FloatOptions> _blinkingTweener;
         [Inject] private ConfigProvider _configProvider;
 
         private Color _defaultColor;
@@ -21,6 +27,7 @@ namespace _Assets.Scripts.Gameplay.Sudoku.Grid.Views
         public int Y { get; private set; }
         public int Number { get; private set; }
         public GameObject GameObject => gameObject;
+
 
         public void Init(int x, int y, int number)
         {
@@ -48,7 +55,6 @@ namespace _Assets.Scripts.Gameplay.Sudoku.Grid.Views
         {
             _numberNote = number;
             Number = 0;
-            SetSprite(number);
             SetSpriteNote(number);
         }
 
@@ -82,23 +88,23 @@ namespace _Assets.Scripts.Gameplay.Sudoku.Grid.Views
             {
                 if (_isPlacedCorrectly)
                 {
-                    image.color = placedCorrectlyColor;
+                    numberImage.color = placedCorrectlyColor;
                 }
 
                 else
                 {
-                    image.color = highLightColor;
+                    numberImage.color = highLightColor;
                 }
             }
             else
             {
                 if (_isPlacedCorrectly)
                 {
-                    image.color = placedCorrectlyColor;
+                    numberImage.color = placedCorrectlyColor;
                 }
                 else
                 {
-                    image.color = _defaultColor;
+                    numberImage.color = _defaultColor;
                 }
             }
         }
@@ -106,7 +112,24 @@ namespace _Assets.Scripts.Gameplay.Sudoku.Grid.Views
         public void PlacedCorrectly()
         {
             _isPlacedCorrectly = true;
-            image.color = placedCorrectlyColor;
+            numberImage.color = placedCorrectlyColor;
+            Blink(false);
+        }
+
+        public void Blink(bool blinking)
+        {
+            Debug.LogError($"Blinking: {blinking}");
+            if (blinking)
+            {
+                _blinkingTweener = canvasGroup.DOFade(0, blinkDuration)
+                    .OnComplete(() => canvasGroup.DOFade(1, blinkDuration))
+                    .SetLoops(-1, LoopType.Yoyo);
+            }
+            else
+            {
+                _blinkingTweener.Kill();
+                canvasGroup.DOFade(1, blinkDuration);
+            }
         }
 
         private void SetSpriteInit(int number)
@@ -115,13 +138,13 @@ namespace _Assets.Scripts.Gameplay.Sudoku.Grid.Views
 
             if (number == 0)
             {
-                image.sprite = null;
+                numberImage.sprite = null;
                 return;
             }
 
             number--;
 
-            image.sprite = _configProvider.SudokuSkin.Sprites[number];
+            numberImage.sprite = _configProvider.SudokuSkin.Sprites[number];
         }
 
         private void SetSprite(int number)
@@ -130,11 +153,11 @@ namespace _Assets.Scripts.Gameplay.Sudoku.Grid.Views
 
             if (number <= 0)
             {
-                image.sprite = null;
+                numberImage.sprite = null;
             }
             else
             {
-                image.sprite = _configProvider.SudokuSkin.Sprites[number - 1];
+                numberImage.sprite = _configProvider.SudokuSkin.Sprites[number - 1];
             }
         }
 
@@ -150,8 +173,6 @@ namespace _Assets.Scripts.Gameplay.Sudoku.Grid.Views
             {
                 notes[number - 1].gameObject.SetActive(true);
             }
-
-            image.sprite = null;
         }
 
         private void ResetNoteSprites()

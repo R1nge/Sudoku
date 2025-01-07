@@ -1,32 +1,20 @@
-﻿using _Assets.Scripts.Gameplay.Sudoku.Grid.Controllers;
-using UnityEngine;
-using VContainer.Unity;
-
-namespace _Assets.Scripts.Services.Tips
+﻿namespace _Assets.Scripts.Services.Tips
 {
-    public class TipsService : ITickable
+    public class TipsService
     {
-        private readonly SudokuGridController _sudokuGridController;
+        private int _tipsLeft = 5;
+        public int TipsLeft => _tipsLeft;
 
-        private TipsService(SudokuGridController sudokuGridController)
+        public bool Show()
         {
-            _sudokuGridController = sudokuGridController;
-        }
-
-        public void Tick()
-        {
-            if (Input.GetKeyDown(KeyCode.T))
+            if (_tipsLeft == 0)
             {
-                _sudokuGridController.OpenMostObviousCell();
+                return false;
             }
-        }
 
-        public void Show()
-        {
-        }
+            _tipsLeft--;
 
-        public void NextStep()
-        {
+            return true;
         }
     }
 }
